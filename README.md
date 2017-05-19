@@ -7,7 +7,7 @@ Error checking can become tedious work in Golang, with tons of nested if-blocks,
 var (
     email      Email
     uniqueSpec UniqueEmailSpecification
-    request    MetadataRequest
+    request    UserRequest
     err        error
 )
 
@@ -17,11 +17,15 @@ okgo.NewOKGO().On(func() bool {
 }).On(func() bool {
     return uniqueSpec.Verify(email)
 }).On(func() bool {
-    e := json.NewDecoder(r).Decode(&request)
-    return e == nil
+    err = json.NewDecoder(r).Decode(&request)
+    return err == nil
 }).Run()
 
-// Do something now with `request`!
+if err == nil {
+    request.Resolve()
+} else {
+    log.Print(err)
+}
 ...
 ```
 
