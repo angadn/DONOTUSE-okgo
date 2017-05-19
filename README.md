@@ -20,5 +20,8 @@ ok := okgo.NewOKGO().On(func() bool {
     e := json.NewDecoder(r).Decode(&request)
     return e == nil
 }).Run()
+
+// Do something now with `request`!
+...
 ```
 
