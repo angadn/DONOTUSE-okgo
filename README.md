@@ -11,7 +11,7 @@ var (
     err        error
 )
 
-ok := okgo.NewOKGO().On(func() bool {
+okgo.NewOKGO().On(func() bool {
     email, err = NewEmail(str)
     return err == nil
 }).On(func() bool {
