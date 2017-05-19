@@ -11,14 +11,13 @@ var (
     err        error
 )
 
-okgo.NewOKGO().On(func() bool {
+okgo.NewOKGO().On(func() error {
     email, err = NewEmail(str)
-    return err == nil
-}).On(func() bool {
+    return err
+}).On(func() error {
     return uniqueSpec.Verify(email)
-}).On(func() bool {
-    err = json.NewDecoder(r).Decode(&request)
-    return err == nil
+}).On(func() error {
+    return json.NewDecoder(r).Decode(&request)
 }).Run()
 
 if err == nil {

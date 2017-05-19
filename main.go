@@ -2,18 +2,18 @@ package okgo
 
 // OKGO holds our execution blocks.
 type OKGO struct {
-	blocks []func() bool
+	blocks []func() error
 }
 
 // NewOKGO constructs an OKGO for us.
 func NewOKGO() OKGO {
 	return OKGO{
-		blocks: make([]func() bool, 0),
+		blocks: make([]func() error, 0),
 	}
 }
 
 // On chains execution blocks.
-func (o OKGO) On(block func() bool) OKGO {
+func (o OKGO) On(block func() error) OKGO {
 	o.blocks = append(o.blocks, block)
 	return o
 }
@@ -21,7 +21,7 @@ func (o OKGO) On(block func() bool) OKGO {
 // Run starts the execution chain.
 func (o OKGO) Run() {
 	for _, block := range o.blocks {
-		if !block() {
+		if block() == nil {
 			break
 		}
 	}
