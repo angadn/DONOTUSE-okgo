@@ -21,7 +21,7 @@ func (o OKGO) On(block func() error) OKGO {
 // Run starts the execution chain.
 func (o OKGO) Run() {
 	for _, block := range o.blocks {
-		if block() == nil {
+		if block() != nil {
 			break
 		}
 	}
