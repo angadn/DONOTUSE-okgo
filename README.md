@@ -11,7 +11,7 @@ var (
     err        error
 )
 
-okgo.NewOKGO().On(func() error {
+okgo.NewOKGO(&err).On(func() error {
     email, err = NewEmail(str)
     return err
 }).On(func() error {
