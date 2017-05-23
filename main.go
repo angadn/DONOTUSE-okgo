@@ -2,12 +2,14 @@ package okgo
 
 // OKGO holds our execution blocks.
 type OKGO struct {
+	err    *error
 	blocks []func() error
 }
 
 // NewOKGO constructs an OKGO for us.
-func NewOKGO() OKGO {
+func NewOKGO(err *error) OKGO {
 	return OKGO{
+		err:    err,
 		blocks: make([]func() error, 0),
 	}
 }
@@ -21,7 +23,8 @@ func (o OKGO) On(block func() error) OKGO {
 // Run starts the execution chain.
 func (o OKGO) Run() {
 	for _, block := range o.blocks {
-		if block() != nil {
+		if err := block(); err != nil {
+			*o.err = err
 			break
 		}
 	}
