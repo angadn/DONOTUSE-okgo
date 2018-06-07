@@ -1,3 +1,8 @@
+# ⛔️ USAGE DISCOURAGED ⛔️
+OKGO leads to terribly unreadable code as the tendency to use it everywhere increases dramatically over time. 
+
+---
+
 # OKGO
 Error checking can become tedious work in Golang, with tons of nested if-blocks, or worse, jumpy goto-like code with `return` statements that terminate functions prematurely on errors. **OKGO** is a microlibrary that proposes a funkier solution.
 
